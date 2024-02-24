@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { updateUsername, updateEmail } = require('../db/sqlHelperFunctions/user');
+const { updateUsername, updateEmail } = require('../db/sqlHelperFunction/user');
 
 
 router.patch('/username', async (req, res, next) => {

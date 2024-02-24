@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { register, login } = require('../db/sqlHelperFunctions/auth');
+const { register, login } = require('../db/sqlHelperFunction/auth');
 
 router.post('/register', async (req, res, next) => {
   try {

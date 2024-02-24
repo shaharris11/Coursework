@@ -1,4 +1,4 @@
-const client = require('../../../../Capstone/Practice/server/db/client');
+const client = require('../client');
 
 async function updateUsername(token, body) {
   try {
@@ -39,7 +39,6 @@ async function updateEmail(token, body) {
 }
 
 module.exports = {
-  updatePic,
   updateUsername,
   updateEmail,
 };

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { like, unlike, getLikes, getLikesByUserId } = require('../db/sqlHelperFunctions/likes');
+const { like, unlike, getLikes, getLikesByUserId } = require('../db/sqlHelperFunction/likes');
 
 router.post('/:id/like', async (req, res, next) => {
   try {

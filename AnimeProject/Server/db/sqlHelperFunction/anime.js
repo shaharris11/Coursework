@@ -1,4 +1,4 @@
-const client = require('../../../../Capstone/Practice/server/db/client');
+const client = require('../client');
 const util = require('util');
 
 async function getAllAnimes() {
@@ -27,7 +27,23 @@ async function getAnimeById(id) {
   }
 }
 
+const createAnimes = async ({name, creator, description, image, link}) => {
+  try {
+      const {
+          rows: [post],
+      } = await client.query (`
+          INSERT INTO characters(name, creator, description, image, link)
+          VALUES($1, $2, $3, $4, $5)
+          RETURNING *;
+      `, [name, creator, description, image, link])
+      return post
+  } catch (error) {
+      throw error
+  }
+}
+
 module.exports = {
   getAnimeById,
-  getAllAnimes
+  getAllAnimes,
+  createAnimes,
 };

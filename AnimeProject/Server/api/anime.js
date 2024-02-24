@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const { getAllAnime, getAnimeById } = require('../db/sqlHelperFunctions/anime');
+const { getAllAnimes, getAnimeById } = require('../db/sqlHelperFunction/anime');
 
 router.get('/', async (req, res, next) => {
   try {
-    const anime = await getAllAnime();
+    const anime = await getAllAnimes();
     res.send(anime);
   } catch (error) {
     next(error);

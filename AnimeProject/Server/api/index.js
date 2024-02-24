@@ -6,8 +6,12 @@ router.get('/health', (req, res, next) => {
 });
 
 router.use('/anime', require('./anime'));
+
 router.use('/auth', require('./auth'));
+
 router.use('/likes', require('./likes'));
+
 router.use('/user', require('./user'));
-router.use('/posts', require('/posts'))
+
+router.use('/posts', require('./posts'))
 module.exports = router;

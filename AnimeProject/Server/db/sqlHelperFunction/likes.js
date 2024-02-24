@@ -1,4 +1,4 @@
-const client = require('../../../../Capstone/Practice/server/db/client');
+const client = require('../client');
 const util = require('util');
 
 async function like(userid, animeid) {
