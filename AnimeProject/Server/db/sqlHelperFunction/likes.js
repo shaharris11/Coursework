@@ -4,9 +4,9 @@ const util = require('util');
 async function like(userid, animeid) {
   try {
     const {
-      rows: [like],
+      rows: [dblike],
     } = await client.query('INSERT INTO likes (userid, animeid) VALUES ($1, $2) RETURNING *', [userid, animeid]);
-    return like;
+    return dblike;
   } catch (error) {
     throw error;
   }

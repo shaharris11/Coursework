@@ -5,8 +5,8 @@ const { like, unlike, getLikes, getLikesByUserId } = require('../db/sqlHelperFun
 
 router.post('/:id/like', async (req, res, next) => {
   try {
-    const like = await like(req.body.userid, req.params.id);
-    res.send(like);
+    const dblike = await like(req.body.userid, req.params.id);
+    res.send(dblike);
   } catch (error) {
     next(error);
   }
