@@ -4,10 +4,10 @@ async function dropTables() {
   try {
     console.log('Dropping All Tables...');
     await client.query(`
-      DROP TABLE IF EXISTS animes;
-      DROP TABLE IF EXISTS users;
-      DROP TABLE IF EXISTS likes;
-      DROP TABLE IF EXISTS posts;
+      DROP TABLE IF EXISTS animes CASCADE;
+      DROP TABLE IF EXISTS users CASCADE;
+      DROP TABLE IF EXISTS likes CASCADE;
+      DROP TABLE IF EXISTS posts CASCADE;
     `);
   } catch (error) {
     throw error;

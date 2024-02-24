@@ -3,7 +3,7 @@ const util = require('util');
 
 async function getAllAnimes() {
   try {
-    const { rows: animes } = await client.query('SELECT * FROM anime ORDER BY name');
+    const { rows: animes } = await client.query('SELECT * FROM animes ORDER BY name');
     return animes;
   } catch (error) {
     throw new Error('Unable to retrieve animes');
@@ -17,9 +17,8 @@ async function getAnimeById(id) {
     } = await client.query(
       `
             SELECT * FROM anime
-            WHERE id = $1;
+            WHERE id = ${id};
         `,
-      [id]
     );
     return anime;
   } catch (error) {
