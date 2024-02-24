@@ -1,12 +1,11 @@
-import Animes from "./anime"
-import Register from "./register"
+import Animes from "./Animes"
 
-export default function Home() {
+
+export default function Home({user}) {
     return (
         <>
            <div>
-            <Register />
-            <Animes />
+            <Animes user={user}/>
            </div> 
         </>
     )
