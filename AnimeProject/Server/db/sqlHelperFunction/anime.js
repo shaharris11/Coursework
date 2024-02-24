@@ -16,7 +16,7 @@ async function getAnimeById(id) {
       rows: [anime],
     } = await client.query(
       `
-            SELECT * FROM anime
+            SELECT * FROM animes
             WHERE id = ${id};
         `,
     );
