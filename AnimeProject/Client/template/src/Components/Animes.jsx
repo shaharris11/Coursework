@@ -69,7 +69,7 @@ export default function Animes({user}) {
                             <img src={anime.image} alt={anime.name} />
                             <>
                                 {myLikes.find((it) => it.id === anime.id) !== undefined ? (
-                                    <button onClick={() => unlike(anime.id, user)}>
+                                    <button className="like-button" onClick={() => unlike(anime.id, user)}>
                                         <GiHeartBeats size='30px' style={{ color: "#c026d3" }} />
                                     </button>
                   ) : (
