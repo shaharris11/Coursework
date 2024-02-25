@@ -31,14 +31,14 @@ const getPostById = async (id) => {
 
 const createPost = async (body) => {
   try {
-      const { rows: [comment] } = await client.query(`
+      const { rows: [post] } = await client.query(`
 
           INSERT INTO posts(title, userid, description)
           VALUES($1, $2, $3)
           RETURNING *;
       `, [body.name, body.userid, body.description]);
       console.log(body.name, body.characterId, body.description);
-      return comment;
+      return post;
   } catch (error) {
       throw error;
   }
@@ -79,6 +79,14 @@ async function deletePost(postid) {
       throw error;
   }
 }
+async function getPostsByUserId(userid) {
+  try {
+    const { rows: likes } = await client.query('SELECT * FROM posts WHERE userid=$2', [userid]);
+    return likes;
+  } catch (error) {
+    throw error;
+  }
+}
 
 module.exports = {
   getPosts,
@@ -86,4 +94,5 @@ module.exports = {
   createPost,
   updatePost,
   deletePost,
+  getPostsByUserId,
 };

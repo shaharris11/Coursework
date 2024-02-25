@@ -37,8 +37,23 @@ async function updateEmail(token, body) {
     throw new Error('Unable to update user email');
   }
 }
+async function getUserByUsername(username) {
+  try {
+    const { rows: [user] } = await client.query(`
+        SELECT *
+        FROM users
+        WHERE user.username = '${username}';
+        `)
+    return user;
+  } catch (error) {
+    throw error;
+  }
+
+}
+
 
 module.exports = {
   updateUsername,
   updateEmail,
+  getUserByUsername,
 };

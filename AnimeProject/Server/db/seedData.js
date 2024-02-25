@@ -40,7 +40,7 @@ async function createTables() {
        CREATE TABLE posts (
         id SERIAL PRIMARY KEY,
         title VARCHAR(50),
-        userid INTEGER NOT NULL,
+        userid INTEGER ,
         description TEXT NOT NULL
        );
       
