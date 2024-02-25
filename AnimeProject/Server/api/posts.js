@@ -5,7 +5,7 @@ const { getPosts, getPostById, createPost, updatePost, deletePost, getPostsByUse
 
 router.get('/', async (req, res, next) => {
   try {
-    const posts = await getPosts(req.params.animeid);
+    const posts = await getPosts(req.params.userid);
     res.send(posts);
   } catch (error) {
     next(error);

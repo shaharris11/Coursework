@@ -36,8 +36,8 @@ const createPost = async (body) => {
           INSERT INTO posts(title, userid, description)
           VALUES($1, $2, $3)
           RETURNING *;
-      `, [body.name, body.userid, body.description]);
-      console.log(body.name, body.characterId, body.description);
+      `, [body.title, body.userid, body.description]);
+      console.log(body.title, body.userid, body.description);
       return post;
   } catch (error) {
       throw error;
