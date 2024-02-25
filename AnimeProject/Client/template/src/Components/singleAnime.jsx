@@ -6,7 +6,7 @@ import Posts from './Post';
 
 const apiUrl = "http://localhost:8080/api"
 
-export default function SingleAnime() {
+export default function SingleAnime({user}) {
     const [anime, setAnime] = useState({})
     const {id} = useParams();
    
@@ -33,7 +33,7 @@ export default function SingleAnime() {
             <p>{anime.description}</p>
             
             <br />
-            {<Posts />}
+            {<Posts user={user}/>}
 
         </div>
         </>

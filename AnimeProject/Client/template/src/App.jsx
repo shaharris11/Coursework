@@ -22,10 +22,10 @@ function App() {
       <Routes>
         <Route path='/' element={<Home user={user} />}/>
         <Route path='/anime' element={<Animes user={user} />} />
-        <Route path= '/anime/:id' element={<SingleAnime />} />
+        <Route path= '/anime/:id' element={<SingleAnime user={user}/>} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login setUser={setUser} />} /> 
-        <Route path='/account' element={<Account />} />
+        <Route path='/account' element={<Account user={user}/>} />
       </Routes>
     </>
   )

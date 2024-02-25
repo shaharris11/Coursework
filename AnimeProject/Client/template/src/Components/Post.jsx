@@ -4,62 +4,61 @@ import { useParams } from "react-router-dom";
 
 
 export default function Posts({user}) {
-    const {animeid} = useParams()
+    const {id} = useParams()
 
     const [title, setTitle] = useState()
     const [description, setDescription] = useState()
     const [allPosts, setAllPosts] = useState()
 
-    console.log(animeid);
-
     useEffect(() => {
         const fetchData = async () => {
-          const data = await fetchPosts(animeid);
+          const data = await fetchPosts(id);
           setAllPosts(data)
         }
         fetchData()
       }, [])
-    const submitHandler = (event) => {
-        event.preventDefault();
-        async function createPost() {
-            const response = { title, description, animeid }
-            const data = await makePosts(response)
-            const results = await fetchPosts(animeid)
+     
+    async function createPost() {
+        const postData = { title, description, id, userid: user?.id, animeid: id }
+        const data = await makePosts(postData)
+        const results = await fetchPosts(id)
+        setAllPosts(results)
+        return data
+    }
+
+    async function updatePost() {
+        try {
+            const response = { title, description }
+            const data = await postUpdate(response, { id })
+            const results = await fetchPosts(id)
             setAllPosts(results)
             return data
+        } catch (error) {
+            console.error(error);
         }
+    }
+    async function postDelete({ id }) {
+        try {
+            await deletePost({ id })
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
-        // async function updatePost() {
-        //     try {
-        //         const response = { name, description }
-        //         const data = await postUpdate(response, { userid })
-        //         const results = await fetchPosts(userid)
-        //         setAllPosts(results)
-        //         return data
-        //     } catch (error) {
-        //         console.error(error);
-        //     }
-        // }
-        // async function postDelete({ postid }) {
-        //     try {
-        //         await deletePost({ postid })
-        //     } catch (error) {
-        //         console.error(error);
-        //     }
-        // }
+
+    const submitHandler = (event) => {
+        event.preventDefault();
         createPost();
-        // updatePost();
-        // postDelete
         setTitle('');
         setDescription('');
-        console.log(user);
     }
+
     return (
         <>
             <h2>
                 Leave a Pulse!
             </h2>
-            <form className="postForm" onSubmit={submitHandler} method="POST">
+            <form className="postForm" onSubmit={submitHandler}>
                 <label>
                     Name:
                     <input
@@ -81,7 +80,8 @@ export default function Posts({user}) {
                 <button type="submit">Submit Pulse</button>
             </form>
             <div>
-                {allPosts && allPosts.map((post) => {
+                {allPosts && allPosts?.length > 0 && allPosts.map((post) => {
+                    console.log(post)
                     return (
                         <>
                             <div>
@@ -92,8 +92,7 @@ export default function Posts({user}) {
                         </>
                     )
                 })}
-
             </div>
         </>
     )
-}   
+}  

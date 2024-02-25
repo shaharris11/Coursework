@@ -21,7 +21,8 @@ export const makePosts = async (post) => {
             body: JSON.stringify({
                 title: post.title,
                 userid: post.userid,
-                description: post.description
+                description: post.description,
+                animeid: post.animeid
             })
         })
         const data = await response.json()
@@ -34,7 +35,7 @@ export const makePosts = async (post) => {
 
 export const postUpdate = async (postid, post) => {
     try {
-        const res = await fetch(`${apiUrl}/post/${postid}`, {
+        const res = await fetch(`http://localhost:8080/api/post/${postid}`, {
             method: 'PUT',
             body: JSON.stringify(post)
         })
@@ -47,7 +48,7 @@ export const postUpdate = async (postid, post) => {
 
 export const deletePost =async (postid) => {
     try {
-        const res = await fetch(`${apiUrl}/posts/${postid}`, {
+        const res = await fetch(`http://localhost:8080/api/posts/${postid}`, {
             method: "DELETE",
         })
         const data = await res.json()
