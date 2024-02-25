@@ -1,5 +1,6 @@
 import { useParams} from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Posts from './Post';
 
 
 
@@ -32,7 +33,7 @@ export default function SingleAnime() {
             <p>{anime.description}</p>
             
             <br />
-            {/* {<Comments />} */}
+            {<Posts />}
 
         </div>
         </>

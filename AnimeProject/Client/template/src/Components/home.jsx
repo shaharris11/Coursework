@@ -6,6 +6,7 @@ export default function Home({user}) {
         <>
            <div>
             <Animes user={user}/>
+            <h1>Welcome to AnimePulse!</h1>
            </div> 
         </>
     )
