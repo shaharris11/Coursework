@@ -1,20 +1,20 @@
 const express = require('express');
 const router = express.Router();
 
-const { getPosts, getPostById, createPost, updatePost, deletePost, getPostsByUserId} = require('../db/sqlHelperFunction/posts');
+const { getPosts, getPostById, createPost, updatePost, deletePost, getPostsByUserId, getPostsByAnimeId} = require('../db/sqlHelperFunction/posts');
 
 router.get('/', async (req, res, next) => {
   try {
-    const posts = await getPosts(req.params.userid);
+    const posts = await getPosts(req.params.animeid);
     res.send(posts);
   } catch (error) {
     next(error);
   }
 });
 
-router.get('/:id/post', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
-    const post = await getPostById();
+    const post = await getPostsByAnimeId(req.params.id);
     res.send(post);
   } catch (error) {
     next(error);

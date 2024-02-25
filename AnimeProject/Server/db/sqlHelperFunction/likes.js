@@ -44,11 +44,17 @@ async function getLikes() {
 async function getLikesByUserId(userid) {
   try {
     const { rows: likes } = await client.query('SELECT * FROM likes WHERE userid=$1', [userid]);
-    return likes;
+    const { rows: animes } = await client.query('SELECT * FROM animes', []);
+    const info = []
+    for (const like of likes) {
+      info.push(animes.find(it => it.id === like.animeid))
+    }
+    return info;
   } catch (error) {
     throw error;
   }
 }
+
 
 module.exports = {
   like,

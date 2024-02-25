@@ -33,10 +33,10 @@ const createPost = async (body) => {
   try {
       const { rows: [post] } = await client.query(`
 
-          INSERT INTO posts(title, userid, description)
-          VALUES($1, $2, $3)
+          INSERT INTO posts(title, userid, animeid, description)
+          VALUES($1, $2, $3, $4)
           RETURNING *;
-      `, [body.title, body.userid, body.description]);
+      `, [body.title, body.userid, body.animeid, body.description]);
       console.log(body.title, body.userid, body.description);
       return post;
   } catch (error) {
@@ -81,10 +81,29 @@ async function deletePost(postid) {
 }
 async function getPostsByUserId(userid) {
   try {
-    const { rows: likes } = await client.query('SELECT * FROM posts WHERE userid=$2', [userid]);
+    console.log(userid);
+    const { rows: likes } = await client.query('SELECT * FROM posts WHERE userid=$1', [userid]);
     return likes;
   } catch (error) {
     throw error;
+  }
+}
+
+const getPostsByAnimeId = async (id) => {
+  try {
+      const {
+          rows: posts
+      } = await client.query(
+          `
+              SELECT *
+              FROM posts
+              WHERE animeid=$1;
+          `,
+          [id]
+      )
+      return posts;
+  } catch (error) {
+      throw error
   }
 }
 
@@ -95,4 +114,5 @@ module.exports = {
   updatePost,
   deletePost,
   getPostsByUserId,
+  getPostsByAnimeId,
 };
