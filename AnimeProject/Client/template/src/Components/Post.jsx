@@ -3,10 +3,10 @@ import { fetchPosts, makePosts, postUpdate, deletePost } from "./FetchingPost";
 import { useParams } from "react-router-dom";
 
 
-export default function Posts() {
+export default function Posts({user}) {
     const {animeid} = useParams()
 
-    const [name, setName] = useState()
+    const [title, setTitle] = useState()
     const [description, setDescription] = useState()
     const [allPosts, setAllPosts] = useState()
 
@@ -19,54 +19,53 @@ export default function Posts() {
         }
         fetchData()
       }, [])
-     
-
     const submitHandler = (event) => {
         event.preventDefault();
         async function createPost() {
-            const response = { name, description, animeid }
+            const response = { title, description, animeid }
             const data = await makePosts(response)
             const results = await fetchPosts(animeid)
             setAllPosts(results)
             return data
         }
 
-        async function updatePost() {
-            try {
-                const response = { name, description }
-                const data = await postUpdate(response, { animeid })
-                const results = await fetchPosts(animeid)
-                setAllPosts(results)
-                return data
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        async function postDelete({ animeid }) {
-            try {
-                await deletePost({ animeid })
-            } catch (error) {
-                console.error(error);
-            }
-        }
+        // async function updatePost() {
+        //     try {
+        //         const response = { name, description }
+        //         const data = await postUpdate(response, { userid })
+        //         const results = await fetchPosts(userid)
+        //         setAllPosts(results)
+        //         return data
+        //     } catch (error) {
+        //         console.error(error);
+        //     }
+        // }
+        // async function postDelete({ postid }) {
+        //     try {
+        //         await deletePost({ postid })
+        //     } catch (error) {
+        //         console.error(error);
+        //     }
+        // }
         createPost();
-        updatePost();
-        postDelete
-        setName('');
+        // updatePost();
+        // postDelete
+        setTitle('');
         setDescription('');
+        console.log(user);
     }
     return (
         <>
             <h2>
                 Leave a Pulse!
             </h2>
-            <form className="postForm" onSubmit={submitHandler}>
+            <form className="postForm" onSubmit={submitHandler} method="POST">
                 <label>
                     Name:
                     <input
-                        placeholder="name"
-                        value={name}
-                        onChange={(event) => { setName(event.target.value) }}
+                        placeholder="title"
+                        value={title}
+                        onChange={(event) => { setTitle(event.target.value) }}
                     />
                 </label>
                 <br />
@@ -86,7 +85,7 @@ export default function Posts() {
                     return (
                         <>
                             <div>
-                                <h2>{post.name}</h2>
+                                <h2>{post.title}</h2>
                                 <p>{post.description}</p>
                                 <button type="submit">Update</button>
                             </div>

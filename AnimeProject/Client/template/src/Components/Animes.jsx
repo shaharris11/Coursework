@@ -64,9 +64,9 @@ export default function Animes({user}) {
             <div className="animeContainer">
                 {animes.map((anime) => {
                     return (
-                        <div key={anime.id} className="anime">
+                        <div key={anime.id} className="anime-card">
                             <h2>{anime.name}</h2>
-                            <img src={anime.imgUrl} alt={anime.name} />
+                            <img src={anime.image} alt={anime.name} />
                             <>
                                 {myLikes.find((it) => it.animeid === anime.id) !== undefined ? (
                                     <button onClick={() => unlike(anime.id, user)}>

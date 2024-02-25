@@ -1,8 +1,8 @@
-const apiUrl = "http://localhost:8080/api"
+
 
 export const fetchPosts = async (animeid) => {
     try {
-        const response = await fetch(`${apiUrl}/posts/${animeid}`)
+        const response = await fetch(`http://localhost:8080/api/posts/${animeid}`)
         const data = await response.json()
         console.log(data);
         return data
@@ -13,13 +13,13 @@ export const fetchPosts = async (animeid) => {
 
 export const makePosts = async (post) => {
     try {
-        const response = await fetch(`${apiUrl}/posts`, {
+        const response = await fetch(`http://localhost:8080/api/posts/`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
               },
             body: JSON.stringify({
-                name: post.name,
+                title: post.title,
                 userid: post.userid,
                 description: post.description
             })
