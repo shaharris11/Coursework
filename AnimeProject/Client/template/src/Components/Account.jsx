@@ -36,7 +36,7 @@ export default function Account({user}) {
                                 <h2>{anime.name}</h2>
                                 <img src={anime.image} alt={anime.name} />
                                 <button onClick={() => { navigate(`/anime/${anime.id}`) }}>See Details</button>
-                                {/* <Link to= '/anime/:id'>Details</Link> */}
+                                <Link to= '/anime/:id'>Details</Link>
 
                             </div>
                         </>
