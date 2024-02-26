@@ -29,13 +29,13 @@ async function getAnimeById(id) {
 const createAnimes = async ({name, creator, description, image, link}) => {
   try {
       const {
-          rows: [post],
+          rows: [anime],
       } = await client.query (`
           INSERT INTO characters(name, creator, description, image, link)
           VALUES($1, $2, $3, $4, $5)
           RETURNING *;
       `, [name, creator, description, image, link])
-      return post
+      return anime
   } catch (error) {
       throw error
   }

@@ -106,6 +106,19 @@ const getPostsByAnimeId = async (id) => {
       throw error
   }
 }
+const getPostAccountTable = async (postid) => {
+  try {
+    const { rows: [post]} = await client.query(`
+    SELECT animes.name, posts.title, posts.description
+    FROM animes
+    INNER JOIN posts ON animes.name = posts.animeid
+    WHERE postid = ${postid}
+    `)
+    return post
+  } catch (error) {
+    throw error
+  }
+}
 
 module.exports = {
   getPosts,
@@ -115,4 +128,5 @@ module.exports = {
   deletePost,
   getPostsByUserId,
   getPostsByAnimeId,
+  getPostAccountTable,
 };
