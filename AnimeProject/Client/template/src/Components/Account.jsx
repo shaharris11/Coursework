@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+
 
 export default function Account({user}) {
     // const [userAccount, setUserAccount] = useState({});
     const [myLikes, setMyLikes] = useState([]);
     const [myPosts, setMyPost] = useState()
+    const navigate = useNavigate()
     useEffect(() => {
         async function fetchAccount() {
             try{
@@ -23,21 +26,8 @@ export default function Account({user}) {
         <>
             <div className="account">
               <p>Welcome!{user?.username} </p>
-              <div>
-                {myPosts && myPosts?.length > 0 && myPosts.map((post) => {
-                    console.log(post)
-                    return (
-                        <>
-                            <div>
-                                <h2>{post.title}</h2>
-                                <p>{post.description}</p>
-                                <button type="submit">Update</button>
-                            </div>
-                        </>
-                    )
-                })}
-            </div>
-            <div>
+             
+            <div className="pageLikes">
                 {myLikes && myLikes?.length > 0 && myLikes.map((anime) => {
                     
                     return (
@@ -45,7 +35,22 @@ export default function Account({user}) {
                             <div>
                                 <h2>{anime.name}</h2>
                                 <img src={anime.image} alt={anime.name} />
-                                <button type="submit">Update</button>
+                                <button onClick={() => { navigate(`/anime/${anime.id}`) }}>See Details</button>
+                                {/* <Link to= '/anime/:id'>Details</Link> */}
+
+                            </div>
+                        </>
+                    )
+                })}
+            </div>
+            <div className="pagePost">
+                {myPosts && myPosts?.length > 0 && myPosts.map((post) => {
+                    console.log(post)
+                    return (
+                        <>
+                            <div>
+                                <h2>{post.title}: {post.description}</h2>
+                               
                             </div>
                         </>
                     )

@@ -6,20 +6,11 @@ export default function Home({user}) {
     const [auth, setAuth] =useState({})
     return (
         <>
-            <div>
-                {
-                    auth.id ? (
-                        <main>
-                        <Animes user={user} />
-                        </main>
-                    ):(
-                        <Animes />
-                    )
-                }
-            </div>
+           
            <div>
+           <h1>Welcome to AnimePulse!</h1>
             <Animes user={user}/>
-            <h1>Welcome to AnimePulse!</h1>
+            
            </div> 
         </>
     )

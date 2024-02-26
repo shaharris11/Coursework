@@ -87,7 +87,7 @@ export default function Posts({user}) {
                             <div>
                                 <h2>{post.title}</h2>
                                 <p>{post.description}</p>
-                                <button type="submit">Update</button>
+                                
                             </div>
                         </>
                     )
